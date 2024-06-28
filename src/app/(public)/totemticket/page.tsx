@@ -3,6 +3,7 @@ import { TicketDniPage } from './components/formticketdni';
 import { useState } from 'react';
 import { TicketNombre } from './components/formticketnombres';
 import { TicketDniPage2 } from './components/formticketdni2';
+import { TicketNombre2 } from './components/formticketnombres2';
 
 
 type FormInput = {
@@ -58,7 +59,7 @@ export default function Totemticket() {
             <TicketDniPage2></TicketDniPage2>
           </div>
           <div className={`bg-slate-100 rounded p-3  ${activeTab !== 'dashboard' && 'hidden'}`} id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">           
-          <TicketNombre></TicketNombre>
+          <TicketNombre2></TicketNombre2>
           </div>
         </div>
 
