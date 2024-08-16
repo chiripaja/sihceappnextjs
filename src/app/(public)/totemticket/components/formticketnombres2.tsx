@@ -19,7 +19,7 @@ export const TicketNombre2 = () => {
   const onSubmitNombre: SubmitHandler<FormInput> = async (data: FormInput) => {
     const { apellidopaterno, apellidomaterno, primernombre } = data;
     const datos = await buscarxnombre(apellidopaterno, apellidomaterno, primernombre)
-    console.log(datos)
+ 
     const atencionesFuturas = datos.map((atencion: any) => {
       const [hours, minutes] = atencion.HoraIngreso.split(':');
       const ingresoDate = new Date();
@@ -32,15 +32,12 @@ export const TicketNombre2 = () => {
       };
     }).filter((atencion: any) => atencion.IngresoDate > now);
  
-    if (atencionesFuturas.length > 0) {
-      
+    if (atencionesFuturas.length > 0) {      
       const futurasAtenciones = atencionesFuturas.filter((atencion: any) => {
         return atencion.IngresoDate > now;
       }).sort((a: any, b: any) => {
         return b.IngresoDate - a.IngresoDate;        
-      });
-      
-
+      });    
       setDatosTable(futurasAtenciones)
     } else {
       SweetAlertService.showError("No se encontro resultados");

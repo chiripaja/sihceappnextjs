@@ -1,4 +1,6 @@
+import { titlefont } from '@/config/font'
 import React from 'react'
+import { Montserrat_Alternates } from 'next/font/google';
 
 function page() {
     return (
@@ -14,6 +16,14 @@ function page() {
                                 <div className="row ">
                                     <div className="col-sm-12">
                                         Registro Postulante
+                                    </div>
+                                    <div className="col-sm-12">
+                                        <p>
+                                            hola mundo
+                                        </p>
+                                        <p className={titlefont.className}>
+                                            hola mundo
+                                        </p>
                                     </div>
                                 </div>
                                 <div className="row">

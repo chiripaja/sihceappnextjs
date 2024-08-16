@@ -23,7 +23,7 @@ export const TicketImpresion = ({ dato }: any) => {
   return (
     <>
       {dato && (
-        <div className='container d-none d-print-block'>
+        <div className='container d-none d-print-block print:items-start'>
           <div className="row text-center  text-xs">
             <div className="col-sm-12 font-bold">
               Hospital Regional Hermilio Valdizan

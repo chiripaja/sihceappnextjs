@@ -5,6 +5,7 @@ import { HiIdentification } from 'react-icons/hi'
 import SweetAlertService from '../../../components/SweetAlertService';
 import { buscarxdni, findnombrepx } from '@/services/TotemServices';
 import { TicketImpresion } from './ticketImpresion';
+import Swal from 'sweetalert2';
 
 
 type FormInput = {
@@ -15,6 +16,10 @@ export const TicketDniPage2 = () => {
     const [datosTable, setDatosTable] = useState<any[]>([]);
     const [nearest, setNearest] = useState<any>(null);
     const [px, setPx] = useState();
+    useEffect(() => {
+        setFocus('dni');
+      }, []);
+    
     useEffect(() => {
         let msj = ""
         if (nearest) {
@@ -33,10 +38,16 @@ export const TicketDniPage2 = () => {
             }
 
                print();
-            SweetAlertService.showAlert(msj, 'success');
+         
+            Swal.fire({                
+                html: `<h5>${msj}</h5>`,
+                timer: 5000, 
+                timerProgressBar: true,
+                icon: 'success',
+              });
         }
     }, [nearest]);
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<FormInput>();
+    const { register, handleSubmit,setFocus, reset, formState: { errors } } = useForm<FormInput>();
 
     const onSubmit: SubmitHandler<FormInput> = async (data: FormInput) => {
         setDatosTable([]);
@@ -56,7 +67,8 @@ export const TicketDniPage2 = () => {
                     today.setUTCHours(0, 0, 0, 0);                     
                     const ingresoDate = new Date(atencion.FechaIngreso);
                     ingresoDate.setUTCHours(0, 0, 0, 0);
-                    const isToday = today.getTime()<ingresoDate.getTime();       
+                    const isToday = today.getTime()<ingresoDate.getTime();  
+                     
                     return isToday;
                 });
            
@@ -91,11 +103,24 @@ export const TicketDniPage2 = () => {
                     });
                     setNearest(nearestAtencion);
                 } else {
-                    console.log(pxdatos)
-                    SweetAlertService.showError(`<b>${pxdatos.ApellidosyNombres}</b><br/> <h5>No se encontraron citas para hoy</h5>`);
+                    Swal.fire({
+                        title: `<span>${pxdatos.ApellidosyNombres}</span>`,
+                        html: `<h5>No se encontraron citas para hoy</h5>`,
+                        timer: 5000, // 3 segundos
+                        timerProgressBar: true,
+                        icon: 'error',
+                      });
+                  
                 }
             } else {
-                SweetAlertService.showError(`<b>${pxdatos.ApellidosyNombres}</b><br/> <h5>No se encontraron citas.</h5>`);
+                
+                Swal.fire({
+                    title: `<span>${pxdatos.ApellidosyNombres}</span>`,
+                    html: `<h5>No se encontraron citas.</h5>`,
+                    timer: 5000, // 3 segundos
+                    timerProgressBar: true,
+                    icon: 'error',
+                  });
             }
         } catch (error) {
             SweetAlertService.showError('No se encuentra paciente en nuestra base de datos.');
@@ -117,13 +142,23 @@ export const TicketDniPage2 = () => {
                             <div className="input-group mb-3">
                                 <span className="input-group-text"><HiIdentification /></span>
                                 <input
-                                    type="text"
+                                    type="number"
                                     className="form-control "
                                     placeholder='dni'
                                     autoFocus={true}
                                     {...register('dni', { required: true })}
                                 />
+      <style jsx>{`
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+`}</style>
                             </div>
                             {errors.dni && <span className='text-red-500'>Este Campo es requerido</span>}
                             <div className="flex">
@@ -157,7 +192,7 @@ export const TicketDniPage2 = () => {
                     <tr key={item.IdAtencion} className="hover:bg-gray-100 border-b border-gray-200 py-10">
                         <td className="px-4 py-4">{item.Paciente.ApellidoPaterno} {item.Paciente.ApellidoMaterno} {item.Paciente.NombresCompletos}</td>
                         <td className="px-4 py-4">{item.Paciente.NroDocumento}</td>
-                        <td className="px-4 py-4">{item.fecha_formate_ticket}</td>
+                        <td className="px-4 py-4">{item.fecha_formate_ticket} {item.HoraIngreso}</td>
                         <td className="px-4 py-4">
                             {item.Servicio.Nombre}
                         </td>
