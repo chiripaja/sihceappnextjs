@@ -32,7 +32,7 @@ export default function Totemticket() {
         <div className="absolute inset-0 bg-black opacity-30 z-10  d-print-none"></div>
         <div className="relative z-10 print:items-start">
           <div className="flex flex-col justify-center  items-center  h-screen  w-full print:items-start print:justify-start">            
-            <div className="w-full max-w-5xl bg-slate-100 rounded shadow">
+            <div className="w-full max-w-5xl bg-slate-100 rounded shadow ">
               <div className="border-b border-gray-400 dark:border-gray-700 mb-2 d-print-none">
                 <ul className="flex flex-wrap -mb-px" id="myTab" role="tablist">
                   <li className="mr-2" role="presentation">
@@ -45,7 +45,7 @@ export default function Totemticket() {
                       aria-controls="profile"
                       aria-selected={activeTab === 'profile'}
                     >
-                      DNI2
+                      DNI
                     </button>
                   </li>
                   <li className="mr-2" role="presentation">
