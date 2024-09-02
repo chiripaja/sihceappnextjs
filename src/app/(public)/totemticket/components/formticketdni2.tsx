@@ -16,6 +16,8 @@ export const TicketDniPage2 = () => {
     const [datosTable, setDatosTable] = useState<any[]>([]);
     const [nearest, setNearest] = useState<any>(null);
     const [px, setPx] = useState();
+    
+    const [ticketdata, setTicketdata] = useState<any>(null);
     useEffect(() => {
         setFocus('dni');
       }, []);
@@ -128,7 +130,36 @@ export const TicketDniPage2 = () => {
         reset();
     };
 
+    const imprimirTicket = async (data: any) => {
+        await setTicketdata(data)
+        let msj = ""
+        if (data) {
+            switch (data.FuentesFinanciamiento.Descripcion) {
+                case "SIS":
+                    msj = "Dirigirse a consultorios.";
+                    break;
+                case "SALUDPOL":
+                    msj = "Dirigirse a modulo de SALUDPOL.";
+                    break;
+                case "PARTICULAR":
+                    msj = "Dirigirse a caja.";
+                case "ESTRATEGIA":
+                    msj = "Dirigirse a consultorios.";
+                    break;
+            }
+        }
 
+        await print();
+        setTicketdata(null);
+        SweetAlertService.showAlert(msj, 'success');
+        Swal.fire({
+            title: `<span>Atencion</span>`,
+            html: `<h5>${msj}</h5>`,
+            timer: 5000, 
+            timerProgressBar: true,
+            icon: 'success',
+          });
+    }
 
     return (
         <>
@@ -185,6 +216,7 @@ export const TicketDniPage2 = () => {
                     <th className="px-4 py-2" style={{ backgroundColor: '#f8f8f8' }}>DNI</th>
                     <th className="px-4 py-2" style={{ backgroundColor: '#f8f8f8' }}>Fecha</th>
                     <th className="px-4 py-2" style={{ backgroundColor: '#f8f8f8' }}>Servicio</th>
+                    <th className="px-4 py-2" style={{ backgroundColor: '#f8f8f8' }}>Imprimir</th>
                 </tr>
             </thead>
             <tbody className="text-sm font-normal text-gray-700">
@@ -196,6 +228,9 @@ export const TicketDniPage2 = () => {
                         <td className="px-4 py-4">
                             {item.Servicio.Nombre}
                         </td>
+                        <td className="px-4 py-4">
+                        <input type="submit" value="Imprimir" className='btn btn-primary w-full' onClick={() => imprimirTicket(item)} />
+                        </td>
                     </tr>
                 ))}
             </tbody>
@@ -206,7 +241,10 @@ export const TicketDniPage2 = () => {
 
 
             <TicketImpresion dato={nearest} />
-
+            {ticketdata && (
+                <TicketImpresion dato={ticketdata} />
+            )}
+            
         </>
     )
 }

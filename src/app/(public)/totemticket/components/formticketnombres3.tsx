@@ -12,7 +12,7 @@ type FormInput = {
 export const TicketNombre3 = () => {
     const [nearest, setNearest] = useState<any>(null);
 
-    const [ticketdata, setTicketdata] = useState()
+    const [ticketdata, setTicketdata] = useState();
     const { register, handleSubmit, reset, formState: { errors } } = useForm<FormInput>();
     const [datosTable, setDatosTable] = useState<any>(null);
 
@@ -202,7 +202,6 @@ export const TicketNombre3 = () => {
                                     <td className="px-4 py-4">{item.Servicio.Nombre}</td>
                                     <td className="px-4 py-4">
                                         <input type="submit" value="Imprimir" className='btn btn-primary w-full' onClick={() => imprimirTicket(item)} />
-
                                     </td>
                                 </tr>
                             ))}
