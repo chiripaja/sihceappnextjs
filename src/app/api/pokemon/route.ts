@@ -11,7 +11,7 @@ export async function GET(request:Request) {
 }
 
 export async function POST(request:Request) {
-    console.log({method:request.method});
+
     return NextResponse.json({
         method:'POST',
         count:100,

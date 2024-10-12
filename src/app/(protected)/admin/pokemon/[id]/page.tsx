@@ -3,7 +3,7 @@ import Image from "next/image";
 const getPokemon=async(id:string)=>{
   const pokemon=await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
   .then(resp=>resp.json())
-  console.log('Se cargo:',pokemon.name)
+
   return pokemon
 }
 export default async function  PokemonPage({params}:any) {

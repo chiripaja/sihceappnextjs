@@ -58,7 +58,7 @@ export default function Totemticket() {
     const { dni } = data;
     const datos = await buscarxdni(dni)
 
-    console.log(datos)
+
 
     const atencionesFuturas = datos.map((atencion: any) => {
       const [hours, minutes] = atencion.HoraIngreso.split(':');
@@ -82,7 +82,7 @@ export default function Totemticket() {
       setNearest(nearest);
     } else {
       SweetAlertService.showError("No se encontro resultados");
-      console.log("entro cuando no hay citas")
+    
     }
     reset();
   }

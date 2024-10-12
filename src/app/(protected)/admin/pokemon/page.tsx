@@ -11,7 +11,7 @@ const getPokemons = async (limit = 20, offset = 0) => {
     name: pokemon.name,
     id: pokemon.url.split('/').at(-2),
   }))
-  console.log(pokemons)
+
   //throw new Error("error");
   return pokemons;
 }
@@ -20,7 +20,7 @@ const getPokemons = async (limit = 20, offset = 0) => {
 
 export default async function page() {
   const pokemons = await getPokemons(25);
-  console.log(pokemons)
+ 
   return (
     <>   
  

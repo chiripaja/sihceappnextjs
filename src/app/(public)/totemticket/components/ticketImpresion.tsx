@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 
 export const TicketImpresion = ({ dato }: any) => { 
+
   const [currentDate, setCurrentDate] = useState('');
   const [currentTime, setCurrentTime] = useState('');
   useEffect(() => {
@@ -59,7 +60,7 @@ export const TicketImpresion = ({ dato }: any) => {
               <span>N° Historia : {dato.Paciente.NroHistoriaClinica}</span>
             </div>
             <div className="col-sm-12 font-bold">
-              <span>N° Cuenta : {dato.IdAtencion}</span>
+              <span>N° Cuenta : {dato.IdCuentaAtencion}</span>
             </div>
             <div className="col-sm-12 font-bold">
               <span>Paciente : {dato.Paciente.ApellidosyNombres}</span>

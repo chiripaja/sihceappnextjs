@@ -40,8 +40,7 @@ export const TicketNombre3 = () => {
                    
                     ingresoDate.setUTCHours(0, 0, 0, 0);
                     const isToday = today.getTime() < ingresoDate.getTime();
-                    console.log(today.getTime())
-                    console.log(ingresoDate.getTime())
+                   
                     return isToday;
                 });
                 setDatosTable(datos);
